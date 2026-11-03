@@ -2,11 +2,18 @@
 import type { Character } from '#shared/types/rick-morty'
 defineProps<{ character: Character; priority?: boolean }>()
 const imageFailed = ref(false)
+
+function toSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
 </script>
 
 <template>
   <NuxtLink
-    :to="`/characters/${character.id}`"
+    :to="`/characters/${character.id}-${toSlug(character.name)}`"
     :prefetch="false"
     class="group block rounded-2xl border border-transparent p-[15px] transition-colors hover:border-white/15 focus-visible:border-accent"
   >

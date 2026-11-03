@@ -7,5 +7,6 @@ export function useCharacterDetails(id: Ref<number>) {
   return useAsyncData(
     () => `character:${id.value}`,
     (_, { signal }) => service.getCharacterDetails(id.value, signal),
+    { lazy: import.meta.client },
   )
 }

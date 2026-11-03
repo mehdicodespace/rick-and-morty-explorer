@@ -1,18 +1,32 @@
 <script setup lang="ts">
 definePageMeta({
   validate: (route) => {
-    if (typeof route.params.id !== 'string') return false
-    return /^[1-9]\d*$/.test(route.params.id)
+    if (typeof route.params.slug !== 'string') return false
+    return /^[1-9]\d*(-.*)?$/.test(route.params.slug)
   },
 })
 
+function toSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
 const route = useRoute()
-const id = computed(() => Number(route.params.id))
+const id = computed(() => Number((route.params.slug as string).split('-')[0]))
 const { data, error, status, refresh } = await useCharacterDetails(id)
 const imageFailed = ref(false)
 
-if (error.value?.statusCode === 404) {
+if (import.meta.server && error.value?.statusCode === 404) {
   throw createError({ statusCode: 404, statusMessage: 'Character not found' })
+}
+
+if (data.value) {
+  const canonicalSlug = `${data.value.character.id}-${toSlug(data.value.character.name)}`
+  if (route.params.slug !== canonicalSlug) {
+    await navigateTo(`/characters/${canonicalSlug}`, { redirectCode: 301, replace: true })
+  }
 }
 
 watch(id, () => {
@@ -71,15 +85,24 @@ useSeoMeta({
             />
           </div>
         </div>
-        <h1 v-else class="text-2xl font-bold">Character details</h1>
+        <CharacterSkeleton v-else-if="status === 'pending'" />
       </div>
     </div>
     <main id="details" class="page-container pt-8 pb-16 md:pt-16" :aria-busy="status === 'pending'">
-      <RequestState
-        v-if="status === 'pending'"
-        title="Loading character…"
-        message="Finding episodes and locations."
-      />
+      <template v-if="status === 'pending'">
+        <section aria-hidden="true">
+          <div class="skeleton mb-5 h-8 w-36 rounded-md md:mb-6" />
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+            <div v-for="n in 8" :key="n" class="skeleton h-24 rounded-2xl" />
+          </div>
+        </section>
+        <section class="mt-8 md:mt-16" aria-hidden="true">
+          <div class="skeleton mb-5 h-8 w-36 rounded-md md:mb-6" />
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+            <div v-for="n in 2" :key="n" class="skeleton h-24 rounded-2xl" />
+          </div>
+        </section>
+      </template>
       <RequestState
         v-else-if="error"
         :title="error.statusCode === 404 ? 'Character not found' : 'Could not load character'"
