@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const page = ref(1)
+import { parsePage } from '#shared/utils/pagination'
+const route = useRoute()
+const page = computed(() => parsePage(route.query.page))
 const name = ref('')
 const { data, status, error, refresh } = await useCharacters(page, name, 12)
 
@@ -13,7 +15,7 @@ const { data, status, error, refresh } = await useCharacters(page, name, 12)
       <RequestState v-else-if="error?.statusCode === 404" title="No characters found" message="Try another name or page." />
       <RequestState v-else-if="error" title="Could not load characters" message="Please try again." retry @retry="refresh()" />
       <template v-else-if="data"><div class="grid grid-cols-4 gap-6"><CharacterCard v-for="(character, index) in data.results" :key="character.id" :character="character" :priority="index === 0" /></div>
-      </template>
+      <AppPagination class="mt-10" :page="page" :total="data.info.pages" :name="name" /></template>
     </main>
   </div>
 </template>
