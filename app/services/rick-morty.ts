@@ -9,6 +9,11 @@ import type {
 
 const API_PAGE_SIZE = 20
 
+interface CharacterCache {
+  getPage(page: number, name: string): ApiCharacterPage | undefined
+  savePage(page: number, name: string, data: ApiCharacterPage): void
+}
+
 function getIdsFromUrls(urls: string[]): number[] {
   const ids: number[] = []
   for (const url of urls) {
@@ -43,7 +48,7 @@ async function getLocations(
   return Array.isArray(data) ? data : [data]
 }
 
-export function createRickMortyService(api: typeof $fetch) {
+export function createRickMortyService(api: typeof $fetch, cache?: CharacterCache) {
   return {
     async getCharacters(
       page: number,
@@ -60,10 +65,13 @@ export function createRickMortyService(api: typeof $fetch) {
       const start = offset % API_PAGE_SIZE
 
       const loadPage = async (p: number): Promise<ApiCharacterPage> => {
+        const cached = cache?.getPage(p, name)
+        if (cached) return cached
         const data = await api<ApiCharacterPage>('/character', {
           query: { page: p, name: name || undefined },
           signal,
         })
+        cache?.savePage(p, name, data)
         return data
       }
 
