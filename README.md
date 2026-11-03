@@ -2,6 +2,10 @@
 
 Character search and detail pages built with Nuxt 4, TypeScript, Tailwind CSS, and Pinia.
 
+## Preview
+
+Live demo: [https://rick-morty-mehdispace.netlify.app](https://rick-morty-mehdispace.netlify.app)
+
 | Character directory                                       | Character details                                             |
 | --------------------------------------------------------- | ------------------------------------------------------------- |
 | ![Character directory](public/readme-imgs/characters.png) | ![Character details](public/readme-imgs/character-detail.png) |
