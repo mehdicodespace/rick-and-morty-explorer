@@ -2,13 +2,15 @@
 import { parsePage } from '#shared/utils/pagination'
 const route = useRoute()
 const page = computed(() => parsePage(route.query.page))
-const name = ref('')
+const name = computed(() => (typeof route.query.name === 'string' ? route.query.name.trim() : ''))
 const { data, status, error, refresh } = await useCharacters(page, name, 12)
-
+async function search(value: string) {
+  await navigateTo({ path: '/', query: { name: value || undefined } }, { replace: true })
+}
 </script>
 <template>
   <div>
-    <div class="hero-surface pb-6"><SiteHeader /><div class="page-container mt-6"><CharacterSearch :name="name"  /></div></div>
+    <div class="hero-surface pb-6"><SiteHeader /><div class="page-container mt-6"><CharacterSearch :name="name" @search="search" /></div></div>
     <main class="page-container pt-16 pb-16" :aria-busy="status === 'pending'">
       <h1 class="sr-only">Rick and Morty characters</h1>
       <RequestState v-if="status === 'pending'" title="Loading characters…" message="Finding characters." />
