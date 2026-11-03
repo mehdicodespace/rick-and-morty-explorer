@@ -60,7 +60,7 @@ onBeforeUnmount(cancelTimer)
       class="flex h-12 shrink-0 items-center justify-center gap-2 rounded-sm bg-accent px-4 text-sm font-bold text-black transition-colors hover:bg-accent/85"
     >
       <AppIcon name="search" class="size-4" />
-      <span class="hidden ">Search</span>
+      <span class="hidden sm:inline">Search</span>
     </button>
   </form>
 </template>

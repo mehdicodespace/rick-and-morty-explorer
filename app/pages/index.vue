@@ -65,14 +65,14 @@ useSeoMeta({
     </div>
     <main
       id="characters"
-      class="page-container scroll-mt-4 pt-8 pb-12  "
+      class="page-container scroll-mt-4 pt-8 pb-12 md:pt-16 md:pb-16"
       :aria-busy="loading"
     >
       <h1 class="sr-only">Rick and Morty characters</h1>
       <div v-if="loading" role="status">
         <p class="sr-only">Loading characters…</p>
         <div
-          class="grid grid-cols-4 gap-x-6 gap-y-6   "
+          class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           aria-hidden="true"
         >
           <div v-for="item in pageSize" :key="item" class="p-4 motion-safe:animate-pulse">
@@ -100,7 +100,7 @@ useSeoMeta({
       />
       <template v-else-if="data">
         <div
-          class="character-results grid grid-cols-4 gap-x-6 gap-y-6   "
+          class="character-results grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         >
           <CharacterCard
             v-for="(character, index) in data.results"

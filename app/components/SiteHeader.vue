@@ -1,5 +1,5 @@
 <template>
-  <header class="page-container flex h-12 items-center ">
+  <header class="page-container flex h-12 items-center md:h-16">
     <NuxtLink to="/" aria-label="Rick and Morty home" class="inline-flex">
       <img
         src="/rick-and-morty.svg"

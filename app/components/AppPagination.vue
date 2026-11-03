@@ -14,7 +14,7 @@ const toPage = (page: number) => ({
   <nav
     v-if="total > 1"
     aria-label="Character pages"
-    class="flex items-center justify-center gap-1 "
+    class="flex items-center justify-center gap-1 sm:gap-2"
   >
     <template v-if="page <= 1">
       <span

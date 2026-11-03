@@ -39,13 +39,13 @@ useSeoMeta({
     </a>
     <div class="character-hero">
       <SiteHeader />
-      <div class="page-container pt-12 pb-8  ">
+      <div class="page-container pt-12 pb-8 md:pt-16 md:pb-16">
         <div
           v-if="data"
-          class="relative isolate flex flex-row gap-4   "
+          class="relative isolate flex flex-col gap-4 md:flex-row md:items-center md:gap-12"
         >
           <div class="character-glow" aria-hidden="true" />
-          <div class="size-45 shrink-0 overflow-hidden rounded-lg bg-field ">
+          <div class="size-45 shrink-0 overflow-hidden rounded-lg bg-field md:size-60">
             <img
               v-if="!imageFailed"
               :src="data.character.image"
@@ -61,7 +61,7 @@ useSeoMeta({
             </span>
           </div>
           <div>
-            <h1 class="text-2xl leading-8 font-bold  ">
+            <h1 class="text-2xl leading-8 font-bold md:text-[32px] md:leading-10">
               {{ data.character.name }}
             </h1>
             <CharacterStatus
@@ -74,7 +74,7 @@ useSeoMeta({
         <h1 v-else class="text-2xl font-bold">Character details</h1>
       </div>
     </div>
-    <main id="details" class="page-container pt-8 pb-16 " :aria-busy="status === 'pending'">
+    <main id="details" class="page-container pt-8 pb-16 md:pt-16" :aria-busy="status === 'pending'">
       <RequestState
         v-if="status === 'pending'"
         title="Loading character…"
@@ -91,14 +91,14 @@ useSeoMeta({
         <section aria-labelledby="episodes-title">
           <h2
             id="episodes-title"
-            class="mb-5 flex items-center gap-4 text-2xl leading-8 font-bold "
+            class="mb-5 flex items-center gap-4 text-2xl leading-8 font-bold md:mb-6"
           >
             <AppIcon name="episodes" class="size-5 text-accent" />
             Episodes
           </h2>
           <div
             v-if="data.episodes.length"
-            class="grid grid-cols-4 gap-4    "
+            class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4"
           >
             <DetailCard
               v-for="episode in data.episodes"
@@ -110,17 +110,17 @@ useSeoMeta({
           </div>
           <p v-else class="text-muted">No episodes are available for this character.</p>
         </section>
-        <section aria-labelledby="locations-title" class="mt-8 ">
+        <section aria-labelledby="locations-title" class="mt-8 md:mt-16">
           <h2
             id="locations-title"
-            class="mb-5 flex items-center gap-4 text-2xl leading-8 font-bold "
+            class="mb-5 flex items-center gap-4 text-2xl leading-8 font-bold md:mb-6"
           >
             <AppIcon name="location" class="size-5 text-accent" />
             Locations
           </h2>
           <div
             v-if="data.locations.length"
-            class="grid grid-cols-4 gap-4    "
+            class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4"
           >
             <DetailCard
               v-for="location in data.locations"
