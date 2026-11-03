@@ -14,6 +14,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    public: {
+      apiBase: '',
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
   },
