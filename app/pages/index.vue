@@ -9,7 +9,7 @@ const characters = [
 </script>
 <template>
   <div>
-    <div class="hero-surface pb-6"><SiteHeader /></div>
+    <div class="hero-surface pb-6"><SiteHeader /><div class="page-container mt-6"><CharacterSearch name="" /></div></div>
     <main class="page-container pt-16 pb-16">
       <h1 class="sr-only">Rick and Morty characters</h1>
       <div class="grid grid-cols-4 gap-6"><CharacterCard v-for="(character, index) in characters" :key="character.id" :character="character" :priority="index === 0" /></div>
