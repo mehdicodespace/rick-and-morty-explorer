@@ -58,8 +58,8 @@ useSeoMeta({
       Skip to characters
     </a>
     <div class="hero-surface pb-6">
-      <SiteHeader />
-      <div class="page-container mt-6">
+      <SiteHeader class="max-md:h-16" />
+      <div class="page-container mt-2 md:mt-6">
         <CharacterSearch :name="name" @typing="startTyping" @search="search" />
       </div>
     </div>

@@ -50,7 +50,7 @@ onBeforeUnmount(cancelTimer)
       type="search"
       placeholder="Search for characters..."
       maxlength="100"
-      class="h-12 min-w-0 flex-1 rounded-sm bg-field px-4 text-sm text-white placeholder:text-white focus-visible:-outline-offset-2"
+      class="h-12 min-w-0 flex-1 rounded-sm bg-field px-4 text-sm text-white transition-colors duration-200 placeholder:text-white hover:bg-white/10 focus-visible:-outline-offset-2 motion-reduce:transition-none"
       @input="scheduleSearch"
       @compositionstart="startComposition"
     />

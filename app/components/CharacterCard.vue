@@ -15,7 +15,7 @@ function toSlug(name: string): string {
   <NuxtLink
     :to="`/characters/${character.id}-${toSlug(character.name)}`"
     :prefetch="false"
-    class="group block rounded-2xl border border-transparent p-[15px] transition-colors hover:border-white/15 focus-visible:border-accent"
+    class="group block rounded-2xl border border-white/10 p-[15px] transition-[border-color,background-color,box-shadow,transform] duration-200 hover:border-accent/50 hover:bg-white/[0.03] hover:shadow-lg hover:shadow-black/15 focus-visible:border-accent motion-safe:hover:-translate-y-1 motion-reduce:transition-none md:border-transparent"
   >
     <article>
       <div class="aspect-square overflow-hidden rounded-lg bg-field">

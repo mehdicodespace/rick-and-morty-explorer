@@ -36,14 +36,22 @@
 }
 
 @keyframes skeleton-shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 @utility hero-surface {
-  background:
-    radial-gradient(ellipse 240px 180px at 20% 55%, #a3c91d80, transparent),
-    linear-gradient(110deg, #2b2e2f, #0b0b0b 65%);
+  background: linear-gradient(90deg, #2c2e30 -0.76%, #0e0e0e 50%);
+
+  @media (width >= 48rem) {
+    background:
+      radial-gradient(ellipse 240px 180px at 20% 55%, #a3c91d80, transparent),
+      linear-gradient(110deg, #2b2e2f, #0b0b0b 65%);
+  }
 }
 
 @layer base {
