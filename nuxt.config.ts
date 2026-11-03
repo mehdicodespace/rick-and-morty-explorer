@@ -21,6 +21,16 @@ export default defineNuxtConfig({
     head: {
       title: 'Rick and Morty',
       htmlAttrs: { lang: 'en' },
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', sizes: 'any', href: '/favicon.svg' },
+        {
+          rel: 'preload',
+          href: '/fonts/rubik-latin.woff2',
+          as: 'font',
+          type: 'font/woff2',
+          crossorigin: 'anonymous',
+        },
+      ],
       meta: [
         { name: 'description', content: 'Explore characters from the Rick and Morty universe.' },
       ],
